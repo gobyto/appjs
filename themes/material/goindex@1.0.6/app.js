@@ -9,9 +9,9 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 ;
 
 // 在head 中 加载 必要静态
-document.write('<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">');
+document.write('<link rel="stylesheet" href="//raw.githubusercontent.com/gobyto/appjs/master/themes/css/mdui.min.css">');
 // markdown支持
-document.write('<script src="//cdn.jsdelivr.net/npm/markdown-it@9.1.0/dist/markdown-it.min.js"></script>');
+document.write('<script src="//raw.githubusercontent.com/gobyto/appjs/master/themes/js/markdown-it.min.js"></script>');
 document.write('<style>.mdui-appbar .mdui-toolbar{height:56px;font-size:1pc}.mdui-toolbar>*{padding:0 6px;margin:0 2px}.mdui-toolbar>i{opacity:.5}.mdui-toolbar>.mdui-typo-headline{padding:0 1pc 0 0}.mdui-toolbar>i{padding:0}.mdui-toolbar>a:hover,a.active,a.mdui-typo-headline{opacity:1}.mdui-container{max-width:980px}.mdui-list-item{transition:none}.mdui-list>.th{background-color:initial}.mdui-list-item>a{width:100%;line-height:3pc}.mdui-list-item{margin:2px 0;padding:0}.mdui-toolbar>a:last-child{opacity:1}@media screen and (max-width:980px){.mdui-list-item .mdui-text-right{display:none}.mdui-container{width:100%!important;margin:0}.mdui-toolbar>.mdui-typo-headline,.mdui-toolbar>a:last-child,.mdui-toolbar>i:first-child{display:block}}</style>');
 // 初始化页面，并载入必要资源
 function init(){
@@ -103,7 +103,7 @@ function list(path){
     $.post(path,'{"password":"'+password+'"}', function(data,status){
         var obj = jQuery.parseJSON(data);
         if(typeof obj != 'null' && obj.hasOwnProperty('error') && obj.error.code == '401'){
-            var pass = prompt("目录加密，请输入密码","");
+            var pass = prompt("目录加密,请输入密码!!!","");
             localStorage.setItem('password'+path, pass);
             if(pass != null && pass != ""){
                 list(path);
@@ -151,7 +151,7 @@ function list_files(path,files){
                 });
             }
             var ext = p.split('.').pop();
-            if("|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|mkv|bmp|jpg|jpeg|png|gif|".indexOf(`|${ext}|`) >= 0){
+            if("|html|php|css|go|java|js|json|txt|sh|py|md|rm|3gp|mov|avi|rmvb|flv|mp4|webm|mkv|bmp|jpg|jpeg|png|gif|".indexOf(`|${ext}|`) >= 0){
 	            p += "?a=view";
 	            c += " view";
             }
@@ -193,7 +193,7 @@ function file(path){
 		return file_code(path);
 	}
 
-	if("|mp4|webm|mkv|".indexOf(`|${ext}|`) >= 0){
+	if("|mp4|webm|mkv|rm|3gp|mov|avi|rmvb|flv|".indexOf(`|${ext}|`) >= 0){
 		return file_video(path);
 	}
 
@@ -214,6 +214,7 @@ function file_code(path){
 		"json":"json",
 		"txt":"Text",
 		"sh":"sh",
+		"py":"py",
 		"md":"Markdown",	
 	};
 	var name = path.split('/').pop();
@@ -229,8 +230,8 @@ function file_code(path){
 </div>
 <a href="${href}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 
-<script src="https://cdn.bootcss.com/ace/1.2.9/ace.js"></script>
-<script src="https://cdn.bootcss.com/ace/1.2.9/ext-language_tools.js"></script>
+<script src="//raw.githubusercontent.com/gobyto/appjs/master/themes/js/ace1.2.9.js"></script>
+<script src="//raw.githubusercontent.com/gobyto/appjs/master/themes/js/ext-language_tools1.2.9.js"></script>
 	`;
 	$('#content').html(content);
 	
@@ -266,9 +267,14 @@ function file_video(path){
 	</video>
 	<br>
 	<!-- 固定标签 -->
+		无法播放用第三方视频解析试试!
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">下载地址</label>
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
+	</div>
+	  <div class="mdui-textfield">
+	  <label class="mdui-textfield-label">无法播放用第三方视频解析试试!</label>
+	  <input class="mdui-textfield-input" type="text" value="https://v.yingyinwu.com/player/player.php?url=${url}"/>
 	</div>
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">引用地址</label>
