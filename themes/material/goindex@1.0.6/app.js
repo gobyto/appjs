@@ -230,8 +230,8 @@ function file_code(path){
 </div>
 <a href="${href}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 
-<script src="//raw.githubusercontent.com/gobyto/appjs/master/themes/js/ace1.2.9.js"></script>
-<script src="//raw.githubusercontent.com/gobyto/appjs/master/themes/js/ext-language_tools1.2.9.js"></script>
+<script src="https://cdn.bootcss.com/ace/1.2.9/ace.js"></script>
+<script src="https://cdn.bootcss.com/ace/1.2.9/ext-language_tools.js"></script>
 	`;
 	$('#content').html(content);
 	
